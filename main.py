@@ -2,34 +2,67 @@ from random import randint
 
 from graphic_arts.start_game_banner import run_screensaver
 
-def attack(char_name: str, char_class: str) -> str:
-    if char_class == 'warrior':
+
+class Character:
+    def __init__(self, char_name):
+        self.char_name = char_name
+
+    def attack(self):
+        pass
+
+    def defence(self):
+        pass
+
+    def special(self):
+        pass
+
+
+class Warrior(Character):
+
+    def __init__(self, char_name):
+        super().__init__(char_name)
+
+    def attack(self):
         return (f'{char_name} нанёс урон противнику равный '
                 f'{5 + randint(3, 5)}')
-    if char_class == 'mage':
+
+    def defence(self):
+        return (f'{char_name} блокировал {10 + randint(5, 10)} урона')
+
+    def special(self):
+        return (f'{char_name} применил специальное умение «Выносливость '
+                f'{80 + 25}»')
+
+
+class Mage(Character):
+
+    def __init__(self, char_name):
+        super().__init__(char_name)
+
+    def attack(self):
         return (f'{char_name} нанёс урон противнику равный '
                 f'{5 + randint(5, 10)}')
-    if char_class == 'healer':
+
+    def defence(self):
+        return (f'{char_name} блокировал {10 + randint(-2, 2)} урона')
+
+    def special(self):
+        return (f'{char_name} применил специальное умение «Атака {5 + 40}»')
+
+
+class Healer(Character):
+
+    def __init__(self, char_name):
+        super().__init__(char_name)
+
+    def attack(self):
         return (f'{char_name} нанёс урон противнику равный '
                 f'{5 + randint(-3, -1)}')
 
-
-def defence(char_name: str, char_class: str) -> str:
-    if char_class == 'warrior':
-        return (f'{char_name} блокировал {10 + randint(5, 10)} урона')
-    if char_class == 'mage':
-        return (f'{char_name} блокировал {10 + randint(-2, 2)} урона')
-    if char_class == 'healer':
+    def defence(self):
         return (f'{char_name} блокировал {10 + randint(2, 5)} урона')
 
-
-def special(char_name: str, char_class: str) -> str:
-    if char_class == 'warrior':
-        return (f'{char_name} применил специальное умение «Выносливость '
-                f'{80 + 25}»')
-    if char_class == 'mage':
-        return (f'{char_name} применил специальное умение «Атака {5 + 40}»')
-    if char_class == 'healer':
+    def special(self):
         return (f'{char_name} применил специальное умение «Защита {10 + 30}»')
 
 
