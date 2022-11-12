@@ -1,5 +1,7 @@
 from random import randint
 
+from graphic_arts.start_game_banner import run_screensaver
+
 DEFAULT_ATTACK = 5
 DEFAULT_DEFENCE = 10
 DEFAULT_STAMINA = 80
@@ -87,13 +89,11 @@ def start_training(character):
     Принимает на вход имя и класс персонажа.
     Возвращает сообщения о результатах цикла тренировки персонажа.
     """
-    # Замените конструкцию условных операторов на словарь.
-    if char_class == 'warrior':
-        print(f'{char_name}, ты Воитель — великий мастер ближнего боя.')
-    if char_class == 'mage':
-        print(f'{char_name}, ты Маг — превосходный укротитель стихий.')
-    if char_class == 'healer':
-        print(f'{char_name}, ты Лекарь — чародей, способный исцелять раны.')
+    dic = {
+        'attack': character.attack,
+        'defence': character.defence,
+        'special': character.special
+    }
     print('Потренируйся управлять своими навыками.')
     print('Введи одну из команд: attack — чтобы атаковать противника, '
           'defence — чтобы блокировать атаку противника или '
@@ -102,14 +102,6 @@ def start_training(character):
     cmd = None
     while cmd != 'skip':
         cmd = input('Введи команду: ')
-        # Вместо блока условных операторов добавьте условие
-        # принадлежности введённой команды словарю.
-        # В функции print() будет вызываться метод класса,
-        # который соответствует введённой команде.
-        if cmd == 'attack':
-            print(attack(char_name, char_class))
-        if cmd == 'defence':
-            print(defence(char_name, char_class))
-        if cmd == 'special':
-            print(special(char_name, char_class))
+        if cmd in dic:
+            print(dic[cmd])
     return 'Тренировка окончена.'
